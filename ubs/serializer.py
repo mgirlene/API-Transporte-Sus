@@ -6,7 +6,7 @@ class EstadoSerializer(serializers.ModelSerializer):
         model = Estado
         fields = '__all__'
 
-class CidaadeSerializer(serializers.ModelSerializer):
+class CidadeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cidade
         fields = '__all__'
