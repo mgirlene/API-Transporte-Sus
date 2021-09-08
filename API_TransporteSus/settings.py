@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps de terceiros
     'rest_framework',
+    # Apps locais
     'accounts',
     'ubs',
+    'agendamento',
 ]
 
 AUTH_USER_MODEL = "accounts.CustomUsuario"

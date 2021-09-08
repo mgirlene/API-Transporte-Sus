@@ -15,8 +15,8 @@ class Estado(models.Model):
 
 class Cidade(models.Model):
     id = models.AutoField(primary_key=True,db_column="id_cidade")
-    nome = models.TextField('nome', max_length=50)
-    estado = models.ForeignKey("ubs.Estado", on_delete= models.CASCADE)
+    nome = models.TextField(max_length=50)
+    estado = models.ForeignKey(Estado, on_delete= models.CASCADE)
 
     def __str__(self):
         return '{}'.format(self.nome)
@@ -28,8 +28,10 @@ class Cidade(models.Model):
 
 class Ubs(models.Model):
     id = models.AutoField(primary_key=True,db_column="id_ubs")
-    nome = models.TextField('nome', max_length=50)
-    cidade = models.ForeignKey("ubs.Cidade", on_delete= models.CASCADE)
+    nome = models.TextField(max_length=50)
+    cidade = models.ForeignKey(Cidade, on_delete= models.CASCADE)
+    endereco = models.CharField(max_length=255)
+    cnes = models.CharField(max_length=20)
 
     def __str__(self):
         return '{}'.format(self.nome)

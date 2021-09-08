@@ -1,11 +1,23 @@
 from django.db import models
-
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from ubs.models import Ubs, Cidade
+from ubs.models import Ubs, Cidade, Estado
 
 
+class EnderecoUser(models.Model):
+    id = models.AutoField(primary_key=True, db_column="id_enderecouser")
+    estado = models.ForeignKey(Estado, models.CASCADE)
+    cidade = models.ForeignKey(Cidade, models.CASCADE)
+    localizacao = models.CharField(max_length=255)
+    ubs = models.ForeignKey(Ubs, models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.localizacao)
+
+    class Meta:
+        db_table = 'endereco_user'
+        verbose_name_plural = 'endereco_user'
 
 class UsuarioManager(BaseUserManager):
     use_in_migrations = True
@@ -36,10 +48,10 @@ class UsuarioManager(BaseUserManager):
 
 class CustomUsuario(AbstractUser):
     email = models.EmailField('E-mail', unique=True)
-    cidade = models.ForeignKey(Cidade,models.DO_NOTHING, db_column="id_cidade", blank=True, null= True)
-    ubs = models.ForeignKey(Ubs,models.DO_NOTHING, db_column="id_ubs",blank=True, null= True)
-    endereco = models.TextField('endereco', max_length=255)
-    is_staff = models.BooleanField("membro",default=True)
+    motorista_ubs = models.BooleanField(default=False)
+    endereco = models.ForeignKey(EnderecoUser, models.CASCADE, blank=True, null=True)
+    ubs = models.ForeignKey(Ubs, models.CASCADE, blank=True, null=True)
+    is_staff = models.BooleanField("membro", default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']
@@ -52,3 +64,4 @@ class CustomUsuario(AbstractUser):
         managed = True
 
     objects = UsuarioManager() 
+    
