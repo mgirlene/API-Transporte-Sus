@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from accounts.models import CustomUsuario
-from accounts.serializer import UsuarioSerializer
+from accounts.serializers import UsuarioSerializer
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):

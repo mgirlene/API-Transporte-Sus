@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.base import Model
+from django.db.models.deletion import CASCADE
 
 class Estado(models.Model):
     id = models.AutoField(primary_key=True,db_column="id_estado")
@@ -40,5 +42,14 @@ class Ubs(models.Model):
         db_table = 'ubs'
         verbose_name_plural = 'ubs'
 
+class Motorista(models.Model):
+    id = models.AutoField(primary_key=True, db_column="id_motorista")
+    usuario = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
+    ubs = models.ForeignKey(Ubs, on_delete=CASCADE)
 
-     
+    def __str__(self):
+        return '{}'.format(self.id)
+
+    class Meta:
+        db_table = 'motorista'
+        verbose_name_plural = 'motoristas'

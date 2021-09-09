@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Agendamento, StatusAgendamento
+from .serializers import AgendamentoSerializer, StatusAgendamentoSerializer
 
-# Create your views here.
+class AgendamentoViewSet(viewsets.ModelViewSet):
+    queryset = Agendamento.objects.all()
+    serializer_class = AgendamentoSerializer
+
+class StatusAgendamentoViewSet(viewsets.ModelViewSet):
+    queryset = StatusAgendamento.objects.all()
+    serializer_class = StatusAgendamentoSerializer

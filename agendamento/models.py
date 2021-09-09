@@ -9,7 +9,7 @@ class Agendamento(models.Model):
     destino = models.CharField(max_length=255)
     data = models.DateField()
     hora = models.DateTimeField()
-    usuario = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
 
     def __str__(self):
         return '{}'.format(self.id)

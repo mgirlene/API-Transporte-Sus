@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from ubs.models import Estado, Cidade, Ubs
-from ubs.serializer import EstadoSerializer, CidadeSerializer, UbsSerializer
+from ubs.models import Estado, Cidade, Ubs, Motorista
+from ubs.serializers import EstadoSerializer, CidadeSerializer, UbsSerializer, MotoristaSerializer
 
 
 class EstadoViewSet(viewsets.ModelViewSet):
@@ -16,3 +16,7 @@ class CidadeViewSet(viewsets.ModelViewSet):
 class UbsViewSet(viewsets.ModelViewSet):
     queryset = Ubs.objects.all()
     serializer_class = UbsSerializer
+
+class MotoristaViewSet(viewsets.ModelViewSet):
+    queryset = Motorista.objects.all()
+    serializer_class = MotoristaSerializer
