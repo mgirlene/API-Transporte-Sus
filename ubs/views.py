@@ -10,13 +10,16 @@ class EstadoViewSet(viewsets.ModelViewSet):
     serializer_class = EstadoSerializer
 
 class CidadeViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
     queryset = Cidade.objects.all()
     serializer_class = CidadeSerializer
 
 class UbsViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
     queryset = Ubs.objects.all()
     serializer_class = UbsSerializer
 
 class MotoristaViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
     queryset = Motorista.objects.all()
     serializer_class = MotoristaSerializer
