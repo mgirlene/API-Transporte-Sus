@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Agendamento, StatusAgendamento
-from .serializers import AgendamentoSerializer, StatusAgendamentoSerializer
+from agendamento.serializers import AgendamentoSerializer, StatusAgendamentoSerializer
 
 class AgendamentoViewSet(viewsets.ModelViewSet):
     queryset = Agendamento.objects.all()
