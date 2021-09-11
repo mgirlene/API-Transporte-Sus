@@ -4,6 +4,8 @@ from django.urls import path, include
 from rest_framework import routers
 from accounts.views import UsuarioViewSet
 from ubs.views import EstadoViewSet, CidadeViewSet, UbsViewSet, MotoristaViewSet
+from ubs.views import EstadoList, CidadeList, UbsList
+from ubs.views import EstadoDetail, CidadeDetail, UbsDetail
 from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -24,5 +26,12 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+
+    path('estadolist/', EstadoList.as_view()),
+    path('cidadelist/', CidadeList.as_view()),
+    path('ubslist/', UbsList.as_view()),
+    path('estadodetail/<int:pk>/', EstadoDetail.as_view()),
+    path('cidadedetail/<int:pk>/', CidadeDetail.as_view()),
+    path('ubsdetail/<int:pk>/', UbsDetail.as_view()),
 ]
