@@ -2,16 +2,15 @@ from django import urls
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from accounts.views import UsuarioViewSet
+from accounts.views import UsuarioCreateAPIView, UsuarioListAPIView
 from ubs.views import EstadoViewSet, CidadeViewSet, UbsViewSet, MotoristaViewSet
-from ubs.views import EstadoList, CidadeList, UbsList
-from ubs.views import EstadoDetail, CidadeDetail, UbsDetail
+from ubs.views import CidadeListApiView, UbsListApiView, EstadoListApiView 
+from ubs.views import EstadoDetailApiView, CidadeDetailApiView, UbsDetailApiView
 from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 router = routers.DefaultRouter()
-router.register(r'usuario', UsuarioViewSet, basename="Usuarios")
 
 router.register(r'estado', EstadoViewSet, basename="Estados")
 router.register(r'cidade', CidadeViewSet, basename="Cidades")
@@ -28,10 +27,13 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view()),
     path('', include(router.urls)),
 
-    path('estadolist/', EstadoList.as_view()),
-    path('cidadelist/', CidadeList.as_view()),
-    path('ubslist/', UbsList.as_view()),
-    path('estadodetail/<int:pk>/', EstadoDetail.as_view()),
-    path('cidadedetail/<int:pk>/', CidadeDetail.as_view()),
-    path('ubsdetail/<int:pk>/', UbsDetail.as_view()),
+    path('usuario/', UsuarioCreateAPIView.as_view()),
+    path('usuariodados/', UsuarioListAPIView.as_view()),
+
+    path('estadolist/', EstadoListApiView.as_view()),
+    path('estadodetail/<int:pk>/', EstadoDetailApiView.as_view()),
+    path('cidadelist/', CidadeListApiView.as_view()),
+    path('cidadedetail/<int:pk>/', CidadeDetailApiView.as_view()),
+    path('ubslist/', UbsListApiView.as_view()),
+    path('ubsdetail/<int:pk>/', UbsDetailApiView.as_view()),
 ]

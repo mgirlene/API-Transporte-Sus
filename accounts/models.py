@@ -37,7 +37,7 @@ class CustomUsuario(AbstractUser):
     cidade = models.ForeignKey(Cidade, models.CASCADE, blank=True, null=True)
     ubs = models.ForeignKey(Ubs, on_delete=models.CASCADE, blank=True, null=True)
     localizacao = models.CharField(max_length=255)
-    is_staff = models.BooleanField("membro", default=True)
+    is_staff = models.BooleanField("ativo", default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

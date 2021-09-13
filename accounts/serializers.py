@@ -11,3 +11,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         return super(UsuarioSerializer, self).create(validated_data)
+
+class UsuarioListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUsuario
+        fields = ['id', 'first_name', 'email', 'motorista_ubs', 'estado', 'cidade', 'ubs', 'localizacao']
