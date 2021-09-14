@@ -30,4 +30,4 @@ class StatusPorAgendamentoApiView(ListAPIView):
 
     def get_queryset(self, agend):
         print(self.get_object(agend))
-        return models.StatusAgendamento.objects.filter(agendamento=1)
+        return models.StatusAgendamento.objects.filter(agendamento=1) # teste
