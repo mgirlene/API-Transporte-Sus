@@ -59,3 +59,10 @@ class MotoristaDetailUsuarioApiView(ListAPIView):
 
     def get_queryset(self):
         return models.Motorista.objects.filter(usuario=self.request.user.id)
+
+class MotoristaDetailsUbsApiView(ListAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = serializers.MotoristaSerializer
+
+    def get_queryset(self):
+        return models.Motorista.objects.filter(ubs=self.kwargs['pk'])

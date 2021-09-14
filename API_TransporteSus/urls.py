@@ -8,8 +8,8 @@ from accounts.views import UsuarioCreateAPIView, UsuarioListAPIView
 from ubs.views import EstadoViewSet, CidadeViewSet, UbsViewSet, MotoristaViewSet
 from ubs.views import CidadeListApiView, UbsListApiView, EstadoListApiView 
 from ubs.views import EstadoDetailApiView, CidadeDetailApiView, UbsDetailApiView
-from ubs.views import MotoristaDetailApiView, MotoristaDetailUsuarioApiView
-from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet, AgendamentoUsuarioApiView, StatusPorAgendamentoApiView
+from ubs.views import MotoristaDetailApiView, MotoristaDetailUsuarioApiView, MotoristaDetailsUbsApiView
+from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet, AgendamentoUsuarioApiView, StatusPorAgendamentoApiView,AgendamentoDetailsUbsApiView
 
 
 router = routers.DefaultRouter()
@@ -41,7 +41,9 @@ urlpatterns = [
 
     path('motoristadetail/<int:pk>/', MotoristaDetailApiView.as_view()),
     path('motoristauser/', MotoristaDetailUsuarioApiView.as_view()),
+    path('motoristaubs/<int:pk>/', MotoristaDetailsUbsApiView.as_view()),
 
     path('agendamentouser/', AgendamentoUsuarioApiView.as_view()),
-    path(r'statusagend/<int:agend>', StatusPorAgendamentoApiView.as_view())
+    path('status/<int:pk>/', StatusPorAgendamentoApiView.as_view()),
+    path('agendamentoubs/<int:pk>/', AgendamentoDetailsUbsApiView.as_view())
 ]
