@@ -8,7 +8,7 @@ class Agendamento(models.Model):
     minha_localizacao = models.CharField(max_length=255)
     destino = models.CharField(max_length=255)
     data = models.DateField()
-    hora = models.DateTimeField()
+    hora = models.TimeField()
     usuario = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
 
     def __str__(self):

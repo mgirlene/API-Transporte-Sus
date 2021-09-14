@@ -2,12 +2,14 @@ from django import urls
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 from accounts.views import UsuarioCreateAPIView, UsuarioListAPIView
 from ubs.views import EstadoViewSet, CidadeViewSet, UbsViewSet, MotoristaViewSet
 from ubs.views import CidadeListApiView, UbsListApiView, EstadoListApiView 
 from ubs.views import EstadoDetailApiView, CidadeDetailApiView, UbsDetailApiView
-from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from ubs.views import MotoristaDetailApiView, MotoristaDetailUsuarioApiView
+from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet, AgendamentoUsuarioApiView, StatusPorAgendamentoApiView
 
 
 router = routers.DefaultRouter()
@@ -36,4 +38,10 @@ urlpatterns = [
     path('cidadedetail/<int:pk>/', CidadeDetailApiView.as_view()),
     path('ubslist/', UbsListApiView.as_view()),
     path('ubsdetail/<int:pk>/', UbsDetailApiView.as_view()),
+
+    path('motoristadetail/<int:pk>/', MotoristaDetailApiView.as_view()),
+    path('motoristauser/', MotoristaDetailUsuarioApiView.as_view()),
+
+    path('agendamentouser/', AgendamentoUsuarioApiView.as_view()),
+    path(r'statusagend/<int:agend>', StatusPorAgendamentoApiView.as_view())
 ]

@@ -17,6 +17,4 @@ class UsuarioListAPIView(ListAPIView):
     serializer_class = UsuarioListSerializer
 
     def get_queryset(self):
-        usuario = self.request.user
-        print(usuario)
         return CustomUsuario.objects.filter(email=self.request.user.email)
