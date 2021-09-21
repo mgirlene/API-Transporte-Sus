@@ -19,13 +19,24 @@ class Agendamento(models.Model):
         db_table='agendamento'
         verbose_name_plural = 'agendamentos'
 
-class StatusAgendamento(models.Model):
+class Status(models.Model):
     id = models.AutoField(primary_key=True, db_column="id_status")
-    status = models.CharField(max_length=50)
+    nome = models.CharField(max_length=50)
+
+    def _str_(self):
+        return '{}'.format(self.nome)
+
+    class Meta:
+        db_table='status'
+        verbose_name_plural = 'status'
+
+class StatusAgendamento(models.Model):
+    id = models.AutoField(primary_key=True, db_column="id_status_agendamento")
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
     agendamento = models.ForeignKey(Agendamento, on_delete=models.CASCADE)
     observacao = models.TextField(max_length=255)
 
-    def __str__(self):
+    def _str_(self):
         return '{}'.format(self.id)
 
     class Meta:
