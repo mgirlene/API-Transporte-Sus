@@ -9,7 +9,7 @@ from ubs.views import EstadoViewSet, CidadeViewSet, UbsViewSet, MotoristaViewSet
 from ubs.views import CidadeListApiView, UbsListApiView, EstadoListApiView 
 from ubs.views import EstadoDetailApiView, CidadeDetailApiView, UbsDetailApiView
 from ubs.views import MotoristaDetailApiView, MotoristaDetailUsuarioApiView, MotoristaDetailsUbsApiView
-from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet, AgendamentoUsuarioApiView, StatusPorAgendamentoApiView,AgendamentoDetailsUbsApiView
+from agendamento.views import AgendamentoViewSet, StatusAgendamentoViewSet, AgendamentoUsuarioApiView, StatusPorAgendamentoApiView,AgendamentoDetailsUbsApiView, StatusViewSet
 
 
 router = routers.DefaultRouter()
@@ -20,6 +20,7 @@ router.register(r'ubs', UbsViewSet, basename="Ubs")
 router.register(r'motorista', MotoristaViewSet, basename="Motoristas")
 
 router.register(r'agendamento', AgendamentoViewSet, basename="Agendamentos")
+router.register(r'status', StatusViewSet, basename="Status")
 router.register(r'statusagendamento', StatusAgendamentoViewSet, basename="StatusAgendamentos")
 
 urlpatterns = [
@@ -44,6 +45,6 @@ urlpatterns = [
     path('motoristaubs/<int:pk>/', MotoristaDetailsUbsApiView.as_view()),
 
     path('agendamentouser/', AgendamentoUsuarioApiView.as_view()),
-    path('status/<int:pk>/', StatusPorAgendamentoApiView.as_view()),
+    path('statusporagendamento/<int:pk>/', StatusPorAgendamentoApiView.as_view()),
     path('agendamentoubs/<int:pk>/', AgendamentoDetailsUbsApiView.as_view())
 ]

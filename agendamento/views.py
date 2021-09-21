@@ -25,6 +25,11 @@ class AgendamentoDetailsUbsApiView(ListAPIView):
     def get_queryset(self):
         return models.Agendamento.objects.filter(ubs=self.kwargs['pk'])
 
+class StatusViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
+    queryset = models.Status.objects.all()
+    serializer_class = serializers.StatusSerializer
+
 class StatusAgendamentoViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, )
     queryset = models.StatusAgendamento.objects.all()
