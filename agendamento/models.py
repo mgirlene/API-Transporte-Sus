@@ -7,6 +7,7 @@ class Agendamento(models.Model):
     ubs = models.ForeignKey(Ubs, on_delete=models.CASCADE)
     minha_localizacao = models.CharField(max_length=255)
     destino = models.CharField(max_length=255)
+    descricao = models.TextField(max_length=255)
     data = models.DateField()
     hora = models.TimeField()
     usuario = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
