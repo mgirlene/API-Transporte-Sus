@@ -1,12 +1,6 @@
-from django.db import models
-from django.db.models import fields
 from rest_framework import serializers
-from ubs.models import Estado, Cidade, Ubs, Motorista
-
-class EstadoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Estado
-        fields = '__all__'
+from ubs.models import Cidade, Ubs
+# from accounts.serializers import UsuarioListSerializer
 
 class CidadeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,11 +8,15 @@ class CidadeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UbsSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Ubs
         fields = '__all__'
 
-class MotoristaSerializer(serializers.ModelSerializer):
+class UbsListSerializer(serializers.ModelSerializer):
+    cidade = CidadeSerializer()
+    motorista = 'accounts.serializers.UsuarioListSerializer()'
+
     class Meta:
-        model = Motorista
+        model = Ubs
         fields = '__all__'

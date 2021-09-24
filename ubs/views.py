@@ -4,65 +4,55 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ubs import models
 from ubs import serializers
 
-class EstadoViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, )
-    queryset = models.Estado.objects.all()
-    serializer_class = serializers.EstadoSerializer
-
-class EstadoListApiView(ListAPIView):
-    queryset = models.Estado.objects.all()
-    serializer_class = serializers.EstadoSerializer
-
-class EstadoDetailApiView(RetrieveAPIView):
-    queryset = models.Estado.objects.all()
-    serializer_class = serializers.EstadoSerializer
+# *** MODELS CIDADE ***
 
 class CidadeViewSet(viewsets.ModelViewSet):
+    '''CRUD de Cidade'''
     permission_classes = (IsAuthenticated, )
     queryset = models.Cidade.objects.all()
     serializer_class = serializers.CidadeSerializer
 
 class CidadeListApiView(ListAPIView):
+    '''Listagem de cidade SEM AUTENTICAÇÃO'''
     queryset = models.Cidade.objects.all()
     serializer_class = serializers.CidadeSerializer
 
 class CidadeDetailApiView(RetrieveAPIView):
+    '''Detalhes de cidade SEM AUTENTICAÇÃO'''
     queryset = models.Cidade.objects.all()
     serializer_class = serializers.CidadeSerializer
 
+
+# *** MODELS UBS ***
+
 class UbsViewSet(viewsets.ModelViewSet):
+    '''CRUD de Ubs'''
     permission_classes = (IsAuthenticated, )
     queryset = models.Ubs.objects.all()
     serializer_class = serializers.UbsSerializer
 
 class UbsListApiView(ListAPIView):
+    '''Listagem de UBS SEM AUTENTICAÇÃO'''
     queryset = models.Ubs.objects.all()
-    serializer_class = serializers.UbsSerializer
+    serializer_class = serializers.UbsListSerializer
 
 class UbsDetailApiView(RetrieveAPIView):
+    '''Detalhes de UBS SEM AUTENTICAÇÃO'''
     queryset = models.Ubs.objects.all()
-    serializer_class = serializers.UbsSerializer
+    serializer_class = serializers.UbsListSerializer
 
-class MotoristaViewSet(viewsets.ModelViewSet):
+class UbsDetailMotoristaApiView(ListAPIView):
+    '''Listagem de UBS pelo id do Motorista'''
     permission_classes = (IsAuthenticated, )
-    queryset = models.Motorista.objects.all()
-    serializer_class = serializers.MotoristaSerializer
-
-class MotoristaDetailApiView(RetrieveAPIView):
-    permission_classes = (IsAuthenticated, )
-    queryset = models.Motorista.objects.all()
-    serializer_class = serializers.MotoristaSerializer
-
-class MotoristaDetailUsuarioApiView(ListAPIView):
-    permission_classes = (IsAuthenticated, )
-    serializer_class = serializers.MotoristaSerializer
+    serializer_class = serializers.UbsListSerializer
 
     def get_queryset(self):
-        return models.Motorista.objects.filter(usuario=self.request.user.id)
+        return models.Ubs.objects.filter(motorista=self.request.user.id)
 
-class MotoristaDetailsUbsApiView(ListAPIView):
+class UbsDetailCidadeApiView(ListAPIView):
+    '''Listagem de UBS pelo id da Cidade'''
     permission_classes = (IsAuthenticated, )
-    serializer_class = serializers.MotoristaSerializer
+    serializer_class = serializers.UbsListSerializer
 
     def get_queryset(self):
-        return models.Motorista.objects.filter(ubs=self.kwargs['pk'])
+        return models.Ubs.objects.filter(cidade=self.kwargs['pk'])

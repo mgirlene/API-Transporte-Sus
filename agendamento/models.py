@@ -1,6 +1,17 @@
 from django.db import models
 from ubs.models import Ubs
-from accounts.models import CustomUsuario
+
+class StatusAgendamento(models.Model):
+    id = models.AutoField(primary_key=True, db_column="id_status_agendamento")
+    status = models.CharField(max_length=50)
+    observacao = models.TextField(max_length=255)
+
+    def _str_(self):
+        return '{}'.format(self.id)
+
+    class Meta:
+        db_table='status_agendamento'
+        verbose_name_plural = 'status_agendamentos'
 
 class Agendamento(models.Model):
     id = models.AutoField(primary_key=True, db_column="id_agendamento")
@@ -11,34 +22,11 @@ class Agendamento(models.Model):
     data = models.DateField()
     hora = models.TimeField()
     usuario = models.ForeignKey('accounts.CustomUsuario', on_delete=models.CASCADE)
+    status = models.ForeignKey(StatusAgendamento, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return '{}'.format(self.id)
+        return '{}'.format(self.destino)
 
     class Meta:
         db_table='agendamento'
         verbose_name_plural = 'agendamentos'
-
-class Status(models.Model):
-    id = models.AutoField(primary_key=True, db_column="id_status")
-    nome = models.CharField(max_length=50)
-
-    def _str_(self):
-        return '{}'.format(self.nome)
-
-    class Meta:
-        db_table='status'
-        verbose_name_plural = 'status'
-
-class StatusAgendamento(models.Model):
-    id = models.AutoField(primary_key=True, db_column="id_status_agendamento")
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    agendamento = models.ForeignKey(Agendamento, on_delete=models.CASCADE)
-    observacao = models.TextField(max_length=255)
-
-    def _str_(self):
-        return '{}'.format(self.id)
-
-    class Meta:
-        db_table='status_agendamento'
-        verbose_name_plural = 'status_agendamentos'

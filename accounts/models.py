@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
-from ubs.models import Cidade, Estado, Ubs
+from ubs.models import Cidade, Ubs
 
 class UsuarioManager(BaseUserManager):
     use_in_migrations = True
@@ -33,9 +33,7 @@ class UsuarioManager(BaseUserManager):
 class CustomUsuario(AbstractUser):
     email = models.EmailField('E-mail', unique=True)
     motorista_ubs = models.BooleanField(default=False)
-    estado = models.ForeignKey(Estado, models.CASCADE, blank=True, null=True)
     cidade = models.ForeignKey(Cidade, models.CASCADE, blank=True, null=True)
-    ubs = models.ForeignKey(Ubs, on_delete=models.CASCADE, blank=True, null=True)
     localizacao = models.CharField(max_length=255)
     is_staff = models.BooleanField("ativo", default=True)
 
